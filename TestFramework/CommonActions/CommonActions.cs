@@ -19,17 +19,17 @@ using System.Collections.Specialized;
 
 namespace TestFramework.CommonActions
 {
-    
+
     class CommonActions
     {
-        
+
         //Clearing the Browser Cookies
         public void ClearCookies(By loc, String value)
         {
             Variables.Variables.driver.Manage().Cookies.DeleteAllCookies();
             Console.WriteLine("Cookies have been cleared");
             NameValueCollection nm = new NameValueCollection();
-            
+
         }
 
         //Launching the browser based on the argument 
@@ -45,7 +45,7 @@ namespace TestFramework.CommonActions
             {
                 Variables.Variables.driver = new InternetExplorerDriver(@"D:\Shinu C#");
             }
-            else if(browser=="Firefox")
+            else if (browser == "Firefox")
             {
                 FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(@"D:\Shinu C#");
                 service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
@@ -72,28 +72,29 @@ namespace TestFramework.CommonActions
                 Highlightelement(ele);
                 ele.Click();
             }
-            catch(NoSuchElementException noex)
+            catch (NoSuchElementException noex)
             {
                 Variables.MKInstances.cd.Scroll(loc, null);
-               Variables.Variables.currentele = Variables.Variables.driver.FindElement(loc);
-               Highlightelement(Variables.Variables.currentele);
-               Variables.Variables.currentele.Click();
+                Variables.Variables.currentele = Variables.Variables.driver.FindElement(loc);
+                Highlightelement(Variables.Variables.currentele);
+                Variables.Variables.currentele.Click();
             }
 
-            
+
             catch (Exception ex)
             {
-                if(ex.ToString().Contains("Clickable"))
+                if (ex.ToString().Contains("Clickable"))
                 {
                     Variables.MKInstances.cd.Scroll(loc, null);
                     Variables.Variables.currentele = Variables.Variables.driver.FindElement(loc);
                 }
-                else {
-                Console.WriteLine("Element not found");
-                Assert.Fail();
-                    }
+                else
+                {
+                    Console.WriteLine("Element not found");
+                    Assert.Fail();
+                }
             }
-           System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(3000);
         }
 
         //Open a url
@@ -148,22 +149,22 @@ namespace TestFramework.CommonActions
             {
                 IWebElement ele = Variables.Variables.driver.FindElement(loc);
                 Highlightelement(ele);
-                if(value.Contains("|"))
+                if (value.Contains("|"))
                 {
-                String editval = value.Replace("|", "");
-                ele.SendKeys(editval);
+                    String editval = value.Replace("|", "");
+                    ele.SendKeys(editval);
                 }
                 else
                 {
-                ele.SendKeys(value);
-                }               
+                    ele.SendKeys(value);
+                }
             }
-            
-                catch (InvalidElementStateException ies)
+
+            catch (InvalidElementStateException ies)
             {
 
             }
-     
+
             catch (Exception ex)
             {
                 Console.WriteLine("Element not found");
@@ -172,21 +173,21 @@ namespace TestFramework.CommonActions
             WaitForJSload(null, null);
 
             //Variables.Variables.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
-        }         
-       
+        }
+
         public void VerifyTitle(By loc, String value)
         {
-           Console.WriteLine("Expected Title: " + value);
-           Console.WriteLine("Actual Title: " + Variables.Variables.driver.Title);
-           if((Variables.Variables.driver.Title).Equals(value))
-           {               
-               Console.WriteLine("Page title matched");
-           }
-           else
-           {
-              // AssertFail(null, "Page Title is not matching");
-               Console.WriteLine("Page Title is not matching");
-           }
+            Console.WriteLine("Expected Title: " + value);
+            Console.WriteLine("Actual Title: " + Variables.Variables.driver.Title);
+            if ((Variables.Variables.driver.Title).Equals(value))
+            {
+                Console.WriteLine("Page title matched");
+            }
+            else
+            {
+                // AssertFail(null, "Page Title is not matching");
+                Console.WriteLine("Page Title is not matching");
+            }
         }
 
         public void Close(By loc, String value)
@@ -195,7 +196,7 @@ namespace TestFramework.CommonActions
             Console.WriteLine("Chrome driver closed");
         }
 
-     //   public
+        //   public
 
         ////Verifying the text
         public void Verifytext(By loc, String expText)
@@ -214,7 +215,7 @@ namespace TestFramework.CommonActions
                     AssertFail(null, "The text is incorrect");
                     //Console.WriteLine(" The text is not matching");
                 }
-               // WaitForJSload(null, null);
+                // WaitForJSload(null, null);
             }
             catch (Exception ex)
             {
@@ -231,7 +232,7 @@ namespace TestFramework.CommonActions
             System.Threading.Thread.Sleep(2000);
             Close(null, null);
             Assert.Fail();
-            
+
         }
 
         public void PageRefresh(By loc, String msg)
@@ -317,7 +318,7 @@ namespace TestFramework.CommonActions
 
             //Actions act = new Actions(Variables.Variables.driver);
             //act.MoveToElement(ele).Perform();
-            
+
             //Variables.Variables.driver.FindElement(By.XPath(option)).Click();
             wait(10);
         }
@@ -334,7 +335,7 @@ namespace TestFramework.CommonActions
             IWebElement ele = Variables.Variables.driver.FindElement(loc);
             IJavaScriptExecutor js = (IJavaScriptExecutor)Variables.Variables.driver;
             js.ExecuteScript("arguments[0].scrollIntoView(true);", ele);
-        }        
+        }
 
         public void DatePicker()
         {
@@ -362,8 +363,8 @@ namespace TestFramework.CommonActions
             IJavaScriptExecutor js = (IJavaScriptExecutor)Variables.Variables.driver;
             String s = @"arguments[0].style.cssText=""border.width:10px; border-style:double; border-color:red"";";
             String s2 = "arguments[0].style.border='3px solid red'";
-          
-            js.ExecuteScript(s2, new Object[] {ele});
+
+            js.ExecuteScript(s2, new Object[] { ele });
             System.Threading.Thread.Sleep(3000);
         }
 
@@ -382,31 +383,32 @@ namespace TestFramework.CommonActions
                     }
                 }
 
-                catch(Exception e)
+                catch (Exception e)
                 {
                     break;
                 }
 
-            
-            
+
+
             }
         }
 
         public void storetext(By loc, String msg)
         {
-            try { 
-            IWebElement ele = Variables.Variables.driver.FindElement(loc);
-            Highlightelement(ele);
-            Variables.Variables.txt.Add(Variables.Variables.driver.FindElement(loc).Text);
-            Console.WriteLine(msg + Variables.Variables.txt.ElementAt(0));
-                }
-            catch(NoSuchElementException noex)
+            try
+            {
+                IWebElement ele = Variables.Variables.driver.FindElement(loc);
+                Highlightelement(ele);
+                Variables.Variables.txt.Add(Variables.Variables.driver.FindElement(loc).Text);
+                Console.WriteLine(msg + Variables.Variables.txt.ElementAt(0));
+            }
+            catch (NoSuchElementException noex)
             {
                 Scroll(loc, null);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                AssertFail(null,"Unknown exception");
+                AssertFail(null, "Unknown exception");
             }
         }
 
@@ -421,12 +423,12 @@ namespace TestFramework.CommonActions
         //Verify consultant
         public void verifyname(By loc, String DB)
         {
-            String text= Variables.Variables.driver.FindElement(loc).Text;
+            String text = Variables.Variables.driver.FindElement(loc).Text;
             IWebElement ele = Variables.Variables.driver.FindElement(loc);
             Highlightelement(ele);
             Console.WriteLine("Expected value: " + text);
             Console.WriteLine("Actual value: " + Variables.MKInstances.sa.Getconsultantname(null, DB));
-            if(text.Contains(Variables.MKInstances.sa.Getconsultantname(null, DB)))
+            if (text.Contains(Variables.MKInstances.sa.Getconsultantname(null, DB)))
             {
                 Console.WriteLine("The Consultant name is matching");
             }
@@ -439,21 +441,21 @@ namespace TestFramework.CommonActions
 
         //Mouse hover
 
-    public void mouseHover(By loc, String msg)
+        public void mouseHover(By loc, String msg)
         {
             Actions act = new Actions(Variables.Variables.driver);
-        IWebElement ele=Variables.Variables.driver.FindElement(loc);
-        Highlightelement(ele);
-        act.MoveToElement(ele).Perform();        
-        
+            IWebElement ele = Variables.Variables.driver.FindElement(loc);
+            Highlightelement(ele);
+            act.MoveToElement(ele).Perform();
+
         }
 
-    public void popuphandle()
-    {
+        public void popuphandle()
+        {
 
-        SendKeys.SendWait(@"Enter");
-    }
-       
+            SendKeys.SendWait(@"Enter");
+        }
+
     }
 
 

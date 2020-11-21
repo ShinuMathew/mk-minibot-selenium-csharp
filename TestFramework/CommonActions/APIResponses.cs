@@ -37,13 +37,13 @@ namespace TestFramework.CommonActions
 
             System.DateTime OrderDate;
             //GetOrderDate service response
-            RestClient client = new RestClient("http://wddceqcaapi01:18929");
+            RestClient client = new RestClient(System.Environment.GetEnvironmentVariable("CA_HOST"));
 
-            RestRequest getOrderDate = new RestRequest("/orders/orderdate");
+            RestRequest getOrderDate = new RestRequest(System.Environment.GetEnvironmentVariable("ORDERS_ORDERDATE"));
 
             getOrderDate.Method = Method.GET;
-            getOrderDate.AddParameter("languages", "en-CA");
-            getOrderDate.AddParameter("SubsidiaryCode", "CA");
+            getOrderDate.AddParameter("languages", System.Environment.GetEnvironmentVariable("LOCAL"));
+            getOrderDate.AddParameter("SubsidiaryCode", System.Environment.GetEnvironmentVariable("SUBSIDIARY"));
 
             IRestResponse getOrderDateResponse = client.Execute(getOrderDate);
             Console.WriteLine("*****************************************************************");
@@ -56,13 +56,13 @@ namespace TestFramework.CommonActions
             OrderDate = Convert.ToDateTime(Date);
 
             //GetOutOfStock service response.
-            RestClient client1 = new RestClient("http://wddceqcaapi01:18929");
+            RestClient client1 = new RestClient(System.Environment.GetEnvironmentVariable("CA_HOST"));
 
             RestRequest getOutOfStockRequest = new RestRequest("/inventory/OutOfStock");
 
             getOutOfStockRequest.Method = Method.GET;
-            getOutOfStockRequest.AddParameter("languages", "en-CA");
-            getOutOfStockRequest.AddParameter("SubsidiaryCode", "CA");
+            getOrderDate.AddParameter("languages", System.Environment.GetEnvironmentVariable("LOCAL"));
+            getOrderDate.AddParameter("SubsidiaryCode", System.Environment.GetEnvironmentVariable("SUBSIDIARY"));
 
             IRestResponse getOutOfStockResponse = client1.Execute(getOutOfStockRequest);
             Console.WriteLine("*****************************************************************");
@@ -87,13 +87,13 @@ namespace TestFramework.CommonActions
             }
 
             //GetproductsByLanguage service response.
-            RestClient client2 = new RestClient("http://wddceqglws21:18961");
+            RestClient client1 = new RestClient(System.Environment.GetEnvironmentVariable("CA_HOST"));
 
-            RestRequest getProductsByLanguageRequest = new RestRequest("/products/findbylanguage");
+            RestRequest getProductsByLanguageRequest = new RestRequest(System.Environment.GetEnvironmentVariable("PS_LANGUAGE"));
 
             getProductsByLanguageRequest.Method = Method.GET;
-            getProductsByLanguageRequest.AddParameter("languages", "en-CA");
-            getProductsByLanguageRequest.AddParameter("SubsidiaryCode", "CA");
+            getOrderDate.AddParameter("languages", System.Environment.GetEnvironmentVariable("LOCAL"));
+            getOrderDate.AddParameter("SubsidiaryCode", System.Environment.GetEnvironmentVariable("SUBSIDIARY"));
             getProductsByLanguageRequest.AddParameter("PageSize", "1500");
 
             IRestResponse getProductsByLanguageResponse = client2.Execute(getProductsByLanguageRequest);
@@ -360,13 +360,13 @@ namespace TestFramework.CommonActions
                 Console.WriteLine(validSKUID);
             }
 
-        }     
+        }
 
         public static void GetValidProducts()
         {
             Console.WriteLine("Getting all the Valid section 1 and 2 products");
             Console.WriteLine("************************************************************");
-            RestClient client = new RestClient("http://wddceqglws21:18961");
+            RestClient client = new RestClient(System.Environment.GetEnvironmentVariable("CA_HOST"));
 
             RestRequest request = new RestRequest("/products/findbylanguage");
 
@@ -374,16 +374,16 @@ namespace TestFramework.CommonActions
             request.AddParameter("languages", "en-CA");
             request.AddParameter("SubsidiaryCode", "CA");
             request.AddParameter("PageSize", "1500");
-            Console.WriteLine("GetProducts service started");           
+            Console.WriteLine("GetProducts service started");
 
             IRestResponse response = client.Execute(request);
 
             dynamic d = JObject.Parse(response.Content);
 
-            String NoOfProducts= d.Total.ToString();
+            String NoOfProducts = d.Total.ToString();
 
-            int TotalProducts=Convert.ToInt32(NoOfProducts);
-            int productsFound=1;
+            int TotalProducts = Convert.ToInt32(NoOfProducts);
+            int productsFound = 1;
 
             try
             {
@@ -441,7 +441,7 @@ namespace TestFramework.CommonActions
         }
 
 
-        }
+    }
     public class MarketSkus
     {
         public String skuID;
@@ -468,5 +468,5 @@ namespace TestFramework.CommonActions
     }
 
 
-    }
+}
 

@@ -37,8 +37,8 @@ namespace TestFramework.Variables
        public static List<String> txt = new List<string>();
        
        //DBInstances
-       public static String CA_QA_DB=@"Data Source=WDDCEQSQL36\EQSQL361;Initial Catalog=Contacts;Integrated Security=True";
-       public static String CA_Stg_DB=@"Data Source=WDDCESSQL21\ESSQL211;Initial Catalog=contacts;Integrated Security=True";
+       public static String CA_QA_DB=@"Data Source="+System.Environment.GetEnvironmentVariable("CA_DB_QAHOST")+";Initial Catalog=Contacts;Integrated Security=True";
+       public static String CA_Stg_DB=@"Data Source="+System.Environment.GetEnvironmentVariable("CA_DB_STGHOST")+";Initial Catalog=contacts;Integrated Security=True";
 
        public static String consultantid = null;
 

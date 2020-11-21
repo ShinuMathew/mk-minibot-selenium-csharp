@@ -8,14 +8,14 @@ namespace TestFramework.Variables
 {
     class MkURL
     {
-        public static String US_eSuite_PROD = "https://www.marykay.com/";
-        public static String US_eComm_PROD = "https://applications.marykayintouch.com/login";
-        public static String US_eComm_QA = "https://qa.applications.marykayintouch.com/login";
-        public static String US_eComm_Staging = "https://staging.applications.marykayintouch.com/login";
-        public static String CA_eComm_PROD = "https://www.marykayintouch.ca/login/";
-        public static String CA_eComm_QA = "https://qa.marykayintouch.ca/login/";
-        public static String CA_eComm_Staging = "https://staging.marykayintouch.ca/login/";
-        public static String CA_eComm_Dev = "https://dev.marykayintouch.ca/login/";
-        public static String MX_eComm_QA = "https://qa.marykayintouch.com.mx/login";
+        public static String US_eSuite_PROD = System.Environment.GetEnvironmentVariable("US_eSuite_PROD");
+        public static String US_eComm_PROD = System.Environment.GetEnvironmentVariable("US_eComm_PROD");
+        public static String US_eComm_QA = System.Environment.GetEnvironmentVariable("US_eComm_QA");
+        public static String US_eComm_Staging = System.Environment.GetEnvironmentVariable("US_eComm_Staging");
+        public static String CA_eComm_PROD = System.Environment.GetEnvironmentVariable("CA_eComm_PROD");
+        public static String CA_eComm_QA = System.Environment.GetEnvironmentVariable("CA_eComm_QA");
+        public static String CA_eComm_Staging = System.Environment.GetEnvironmentVariable("CA_eComm_Staging");
+        public static String CA_eComm_Dev = System.Environment.GetEnvironmentVariable("CA_eComm_Dev");
+        public static String MX_eComm_QA = System.Environment.GetEnvironmentVariable("MX_eComm_QA");
     }
 }
